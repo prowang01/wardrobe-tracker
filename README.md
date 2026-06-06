@@ -1,73 +1,48 @@
-# React + TypeScript + Vite
+# 👕 Wardrobe Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A personal tool to track clothing purchases, returns, refunds and resales, with a live treasury dashboard.
 
-Currently, two official plugins are available:
+## Why I built this
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+I found myself juggling tons of fashion purchases across multiple platforms (Uniqlo, COS, Adidas, Zara...) and resales on Vinted, with refunds in progress and orders on the way. 
 
-## React Compiler
+No existing app tracked the financial side of it, they all focus on outfit planning, not cashflow.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+So I built my own.
 
-## Expanding the ESLint configuration
+## What it does
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Add clothing items** with name, brand, price, size, color and product reference
+- **Track status** across the full lifecycle: Wishlist → Ordered → In delivery → Kept / To return / Return in progress / Refund pending → Refunded / Resold
+- **Live treasury dashboard** with an interactive donut chart showing:
+  - Net balance (what you've actually spent)
+  - Pending refunds (money coming back)
+  - Recovered (refunded + resold)
+- **Filter by status** to see only what's in delivery, only returns, etc.
+- **Edit or delete** any item at any time
+- **Persistent data** via localStorage : everything stays between sessions
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Tech stack
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- React + TypeScript
+- Vite
+- Tailwind CSS
+- localStorage (no backend)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Getting started
+
+```bash
+git clone https://github.com/prowang01/wardrobe-tracker.git
+cd wardrobe-tracker
+npm install
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Then open [http://localhost:5173](http://localhost:5173).
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Roadmap
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- [ ] Multi-account support (Revolut, PCS, cash)
+- [ ] Product photo upload
+- [ ] Stats by brand
+- [ ] Deploy online (Vercel)
