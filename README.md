@@ -1,48 +1,120 @@
-# 👕 Wardrobe Tracker
+# 👗 Wardrobe Tracker
 
-A personal tool to track clothing purchases, returns, refunds and resales, with a live treasury dashboard.
+A personal wardrobe management app to track clothing purchases across their full lifecycle — from wishlist to return, resale or refund — with real-time financial tracking.
 
-## Why I built this
+> Built as a portfolio project with React + TypeScript + Vite + Tailwind-inspired inline styles.
 
-I found myself juggling tons of fashion purchases across multiple platforms (Uniqlo, COS, Adidas, Zara...) and resales on Vinted, with refunds in progress and orders on the way. 
+![Wardrobe Tracker Preview](https://raw.githubusercontent.com/prowang01/wardrobe-tracker/main/preview.png)
 
-No existing app tracked the financial side of it, they all focus on outfit planning, not cashflow.
+---
 
-So I built my own.
+## ✨ Features
 
-## What it does
+### 📊 Financial Dashboard
+- **Net balance** displayed in a live SVG donut chart (spent / pending refund / recovered)
+- Clickable stat tiles to filter articles by financial status
+- Per-brand insights: keep rate, spend, recovery and breakdown mini pie chart
 
-- **Add clothing items** with name, brand, price, size, color and product reference
-- **Track status** across the full lifecycle: Wishlist → Ordered → In delivery → Kept / To return / Return in progress / Refund pending → Refunded / Resold
-- **Live treasury dashboard** with an interactive donut chart showing:
-  - Net balance (what you've actually spent)
-  - Pending refunds (money coming back)
-  - Recovered (refunded + resold)
-- **Filter by status** to see only what's in delivery, only returns, etc.
-- **Edit or delete** any item at any time
-- **Persistent data** via localStorage : everything stays between sessions
+### 👕 Article Management
+- Add, edit and delete clothing items with a clean modal form
+- 9 lifecycle statuses: Wishlist → Ordered → Shipped → Kept / Returned / Refunded / Resold
+- Category, size, color, reference, payment method, product URL and photo URL fields
+- Photo lightbox on click
 
-## Tech stack
+### ⚡ Inline Editing
+- Click any field directly in the detail drawer to edit it instantly
+- Status and category as clickable badge dropdowns
+- Payment method editable with bank name field
+- All changes persist to `localStorage` with no page reload
 
-- React + TypeScript
-- Vite
-- Tailwind CSS
-- localStorage (no backend)
+### 🔍 Smart Filtering
+- Filter by category, status, brand and payment method
+- Each filter has its own search input and scrollable list
+- Active filter count with one-click reset
 
-## Getting started
+---
+
+## 🛠 Tech Stack
+
+| Layer | Technology |
+|-------|-----------|
+| Framework | React 18 + TypeScript |
+| Build tool | Vite |
+| Icons | lucide-react |
+| Styling | Inline styles (no CSS framework) |
+| Persistence | localStorage |
+| Deployment | Vercel *(coming soon)* |
+
+---
+
+## 🚀 Getting Started
 
 ```bash
+# Clone the repo
 git clone https://github.com/prowang01/wardrobe-tracker.git
 cd wardrobe-tracker
+
+# Install dependencies
 npm install
+
+# Start the dev server
 npm run dev
 ```
 
-Then open [http://localhost:5173](http://localhost:5173).
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-## Roadmap
+---
 
-- [ ] Multi-account support (Revolut, PCS, cash)
-- [ ] Product photo upload
-- [ ] Stats by brand
-- [ ] Deploy online (Vercel)
+## 📁 Project Structure
+
+```
+src/
+└── App.tsx       # All application code (components, state, logic)
+```
+
+The entire app lives in a single `App.tsx` file (~1000 lines), intentionally keeping the architecture simple and readable for a portfolio project.
+
+---
+
+## 💡 Financial Logic
+
+| Metric | Definition |
+|--------|-----------|
+| `totalDepense` | Sum of all items that were ordered (excludes Wishlist) |
+| `recupere` | Sum of Refunded + Resold items |
+| `enAttente` | Sum of items with status "En cours de remboursement" |
+| `bilanNet` | `totalDepense − recupere` |
+| `perdu` | `max(bilanNet − enAttente, 0)` |
+
+---
+
+## 📸 Screenshots
+
+> *Add your own screenshots here*
+
+| Dashboard | Article detail | Add item |
+|-----------|---------------|----------|
+| ![](./screenshots/dashboard.png) | ![](./screenshots/drawer.png) | ![](./screenshots/form.png) |
+
+---
+
+## 🗺 Roadmap
+
+- [ ] Deploy on Vercel with live demo link
+- [ ] Export data as CSV
+- [ ] Auto-fill item details from product URL
+- [ ] Authentication + cloud sync
+- [ ] Mobile-responsive layout
+
+---
+
+## 👤 Author
+
+**Prosper Wang**
+- GitHub: [@prowang01](https://github.com/prowang01)
+
+---
+
+## 📄 License
+
+MIT
